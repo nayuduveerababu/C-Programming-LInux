@@ -1,0 +1,2097 @@
+
+
+********************POINTER TO STRING*****************
+
+#include <stdio.h>
+
+int main() {
+    char str[25] = "Hello veera babu Nayudu";
+    char *ptr = &str;
+    while(*ptr != '\0'){
+        printf("%c",*ptr);
+        ptr++;
+    }
+    printf("\nHello world");
+    return 0;
+
+
+}
+
+******************* POINTER TO ARRAY********************
+
+#include <stdio.h>
+
+int main() {
+    int arr[12] = {1,2,3,4,5,4,3,2,2,1,1,1};
+    int *ptr;
+    ptr = arr;
+    for(int i=0; i<12; i++,ptr++){
+        printf("%d\t",*ptr);
+    }
+    printf("\nHello world");
+
+    return 0;
+}
+
+
+*********************************************************************
+SELECTION SORT
+
+#include <stdio.h>  
+  
+void selection(int arr[], int n)  
+{  
+    int i, j, small;  
+      
+    for (i = 0; i < n-1; i++)    // One by one move boundary of unsorted subarray  
+    {  
+        small = i; //minimum element in unsorted array  
+          
+        for (j = i+1; j < n; j++)  
+        if (arr[j] < arr[small])  
+            small = j;  
+// Swap the minimum element with the first element  
+    int temp = arr[small];  
+    arr[small] = arr[i];  
+    arr[i] = temp;  
+    }  
+}  
+  
+void printArr(int a[], int n) /* function to print the array */  
+{  
+    int i;  
+    for (i = 0; i < n; i++)  
+        printf("%d ", a[i]);  
+}  
+  
+int main()  
+{  
+    int a[] = { 12, 31, 25, 8, 32, 17 };  
+    int n = sizeof(a) / sizeof(a[0]);  
+    printf("Before sorting array elements are - \n");  
+    printArr(a, n);  
+    selection(a, n);  
+    printf("\nAfter sorting array elements are - \n");    
+    printArr(a, n);  
+    return 0;  
+}    
+
+
+
+*****************************************************************************
+BOBBLE SORT 
+
+#include<stdio.h>    
+ void print(int a[], int n) //function to print array elements  
+    {  
+    int i;  
+    for(i = 0; i < n; i++)    
+    {    
+        printf("%d ",a[i]);    
+    }        
+    }  
+ void bubble(int a[], int n) // function to implement bubble sort  
+ {  
+   int i, j, temp;  
+   for(i = 0; i < n; i++)    
+    {    
+      for(j = i+1; j < n; j++)    
+        {    
+            if(a[j] < a[i])    
+            {    
+                temp = a[i];    
+                a[i] = a[j];    
+                a[j] = temp;     
+            }     
+        }     
+    }     
+ }  
+void main ()    
+{    
+    int i, j,temp;     
+    int a[5] = { 10, 35, 32, 13, 26};     
+    int n = sizeof(a)/sizeof(a[0]);   
+    printf("Before sorting array elements are - \n");  
+    print(a, n);  
+    bubble(a, n);  
+    printf("\nAfter sorting array elements are - \n");    
+    print(a, n);  
+}    
+
+
+***********************************************************************************
+
+INSERTION SORT 
+
+#include <stdio.h>  
+  
+void insert(int a[], int n) /* function to sort an aay with insertion sort */  
+{  
+    int i, j, temp;  
+    for (i = 1; i < n; i++) {  
+        temp = a[i];  
+        j = i - 1;  
+  
+        while(j>=0 && temp <= a[j])  /* Move the elements greater than temp to one position ahead from their current position*/  
+        {    
+            a[j+1] = a[j];     
+            j = j-1;    
+        }    
+        a[j+1] = temp;    
+    }  
+}  
+  
+void printArr(int a[], int n) /* function to print the array */  
+{  
+    int i;  
+    for (i = 0; i < n; i++)  
+        printf("%d ", a[i]);  
+}  
+  
+int main()  
+{  
+    int a[] = { 12, 31, 25, 8, 32, 17 };  
+    int n = sizeof(a) / sizeof(a[0]);  
+    printf("Before sorting array elements are - \n");  
+    printArr(a, n);  
+    insert(a, n);  
+    printf("\nAfter sorting array elements are - \n");    
+    printArr(a, n);  
+  
+    return 0;  
+}    
+
+
+************************************************************************************
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    int data;
+    struct node *next;
+};
+
+void add(struct node **head, int data){
+    struct node *new = (struct node*)malloc(sizeof(struct node));
+    new->data = data;
+    new->next = *head;
+    *head = new;
+}
+
+void Addressprint(struct node *head){
+    struct node *temp = head;
+    while(temp != NULL){
+        printf("%d\t %p\t %p\n",temp->data,&(temp->data),temp->next);
+        temp = temp->next;
+    }
+}
+
+void print(struct node *head){
+    struct node *temp = head;
+    while(temp != NULL){
+        printf("%d -> ",temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+void reverse(struct node **head){
+    struct node *new,*curr = *head;
+    struct node *prev = NULL,*next = NULL;
+    while(curr != NULL){
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    *head = prev;
+}
+int main()
+{
+    struct node *head = NULL;
+  int n,data,i;
+  printf("Enter the size of list = ");
+  scanf("%d",&n);
+  for(i=0;i<n;i++){
+      printf("Enter %d value = ",i+1);
+      scanf("%d",&data);
+      add(&head,data);
+  }
+  print(head);
+  Addressprint(head);
+  reverse(&head);
+  print(head);
+    return 0;
+}
+
+****** draw a dimand symbol??????????????
+
+#include <stdio.h>
+
+int main()
+{
+    int i,j,k,rows = 10;
+    // piramid
+    for(i=0;i<=rows;i++){
+        for(j=0;j<rows-i;j++){
+            printf(" ");
+        }
+        for(k=0;k<i*2-1;k++){
+            printf("*");
+        }
+        printf("\n");
+    }
+    // invert piramid
+    for(i=rows-1;i>=0;i--){
+        for(j=0;j<rows-i;j++){
+            printf(" ");
+        }
+        for(k=0;k<i*2-1;k++){
+            printf("*");
+        }
+        printf("\n");
+    }
+   
+   // printf("Hello World");
+
+    return 0;
+}
+
+Nayudu Veera Babu having 2.9years of experience with c and Linux environment 
+
+
+
+*****************************************************************************
+
+// C program to set, clear and toggle a bit
+
+#include <stdio.h>
+
+// Function to set the kth bit of n
+int setBit(int n, int k)
+{
+	return (n | (1 << (k - 1)));
+}
+
+// Function to clear the kth bit of n
+int clearBit(int n, int k)
+{
+	return (n & (~(1 << (k - 1))));
+}
+
+// Function to toggle the kth bit of n
+int toggleBit(int n, int k)
+{
+	return (n ^ (1 << (k - 1)));
+}
+
+// Driver code
+int main()
+{
+	int n = 5, k = 2;
+
+	printf("%d with %d-th bit Set: %d\n",
+		n, k, setBit(n, k));
+	printf("%d with %d-th bit Cleared: %d\n",
+		n, k, clearBit(n, k));
+	printf("%d with %d-th bit Toggled: %d\n",
+		n, k, toggleBit(n, k));
+	return 0;
+}
+\
+
+
+************************************************************
+
+
+// C program to demonstrate working of memset()
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+	char str[50] = "GeeksForGeeks is for programming geeks.";
+	printf("\nBefore memset(): %s\n", str);
+
+	// Fill 8 characters starting from str[13] with '.'
+	memset(str + 13, '.', 8*sizeof(char));
+
+	printf("After memset(): %s", str);
+	return 0;
+}
+***************************************************
+
+#include <stdio.h>
+
+int main(){
+    int choice, len=0;
+    char str[50];
+    printf("enter the string == ");
+    scanf("%s",str);
+    while(str[len]!= '\0'){
+        len++;
+    }
+    printf("%d",len);
+    return 0;
+}
+
+*************************************************
+
+#include <stdio.h>
+#include <string.h>
+int main(){
+    int choice=1, len=0;
+    char str[50];
+    printf("enter the string == ");
+    scanf("%[^\n]s",str);
+    while(str[len]!= '\0'){
+        if(str[len] == ' '){
+            choice++;
+        }
+        len++;
+    }
+   // len = strlen(str)-1;
+    printf("%d\n",len);  
+    printf("%d",choice);
+    return 0;
+}
+
+******************************************
+
+#include <stdio.h>
+#include <string.h>
+int main(){
+    int i=0,j=0,len=0;
+    char str1[50] = "veera";
+    char str2[50] = "babu";
+    char temp[50];
+    len =strlen(str2);
+   /* for( i=0; str1[i]!='\0';i++)
+        {
+            str1[i] = str1[i];
+        } */
+    for( j=0; j<=len;j++)
+    
+    {
+       printf("%s",str1+str2[j]);
+        
+    }
+ // printf("%s",str1);
+    printf("%s",str2);
+        printf("%s",str1);
+
+    return 0;}
+
+*******************************************************************'
+#include <stdio.h>
+#include <string.h>
+int main(){
+  int arr[] = {1,2,3,4,5,6,7,8,9,0};
+  int i,len = 0,j,temp;
+  len = sizeof(arr)/sizeof(arr[0]);
+  for(i=0,j=len-1;i<j;i++,j--){
+      temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+  }
+  printf("Reverse array = ");
+  for(i=0;i<len;i++){
+      printf("%d",arr[i]);
+  }
+  printf("\n");
+  printf("arr length = %d",len);
+    return 0;
+}
+
+**************************************************************************
+
+
+#include <stdio.h>
+#include <string.h>
+int main(){
+  int arr[] = {10,3,2,5,8,6,12,4,1,0};
+  int i,len = 0,j,temp;
+  len = sizeof(arr)/sizeof(arr[0]);
+  for(i=0;i<len;i++){
+      for(j=i;j<len;j++){
+     if(arr[i]>arr[j]){
+      temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+  }
+  }
+  }
+  printf("Reverse array = ");
+  for(i=0;i<len;i++){
+      printf("%d\t",arr[i]);
+  }
+  printf("\n");
+  printf("arr length = %d",len);
+    return 0;
+}
+
+*****************************************************************
+
+#include <stdio.h>
+#include <string.h>
+
+void main()
+{
+    char str[50];
+    char *q = "veera babu";
+   /* printf("enter the string == ");
+  scanf("%[^\n]s",str);*/
+  char *p = q;
+  printf("%s",q);
+   // return 0;
+}
+
+
+***************************************************************
+
+
+
+#include<stdio.h>  
+
+int main(){
+    int arr[5] = {10,20,30,40,50};
+    int p;
+    printf("enter the position value == ");
+    scanf("%d",&p);
+    printf("%d",arr[p-1]);
+}
+
+*********************************************************************
+
+
+
+Threads
+
+
+ 
+
+Threads
+Processes Vs Threads
+Why Threads?
+User-Level Threads
+Kernel-Level Threads
+Advantages of Threads over Multiple Processes
+Disadvantages of Threads over Multiprocesses
+Application that Benefits from Threads
+Application that cannot benefit from Threads
+Resources used in Thread creation and Process Creation
+Context Switch
+Major Steps of Context Switching
+Action of Kernel to Context switch among threads
+Action of kernel to Context switch among processes
+ 
+
+Threads
+Despite of the fact that a thread must execute in process, the process and its associated threads are different concept. Processes are used to group resources together and threads are the entities scheduled for execution on the CPU.
+A thread is a single sequence stream within in a process. Because threads have some of the properties of processes, they are sometimes called lightweight processes. In a process, threads allow multiple executions of streams. In many respect, threads are popular way to improve application through parallelism. The CPU switches rapidly back and forth among the threads giving illusion that the threads are running in parallel. Like a traditional process i.e., process with one thread, a thread can be in any of several states (Running, Blocked, Ready or Terminated). Each thread has its own stack. Since thread will generally call different procedures and thus a different execution history. This is why thread needs its own stack. An operating system that has thread facility, the basic unit of CPU utilization is a thread. A thread has or consists of a program counter (PC), a register set, and a stack space. Threads are not independent of one other like processes as a result threads shares with other threads their code section, data section, OS resources  also known as task, such as open files and signals.
+
+Processes Vs Threads
+As we mentioned earlier that in many respect threads operate in the same way as that of processes. Some of the similarities and differences are:
+
+Similarities
+
+Like processes threads share CPU and only one thread active (running) at a time.
+Like processes, threads within a processes, threads within a processes execute sequentially.
+Like processes, thread can create children.
+And like process, if one thread is blocked, another thread can run.
+Differences
+
+Unlike processes, threads are not independent of one another.
+Unlike processes, all threads can access every address in the task .
+Unlike processes, thread are design to assist one other. Note that processes might or might not assist one another because processes may originate from different users.
+ 
+
+Why Threads?
+Following are some reasons why we use threads in designing operating systems.
+
+A process with multiple threads make a great server for example printer server.
+Because threads can share common data, they do not need to use interprocess communication.
+Because of the very nature, threads can take advantage of multiprocessors.
+Threads are cheap in the sense that
+
+They only need a stack and storage for registers therefore, threads are cheap to create.
+Threads use very little resources of an operating system in which they are working. That is, threads do not need new address space, global data, program code or operating system resources.
+Context switching are fast when working with threads. The reason is that we only have to save and/or restore PC, SP and registers.
+But this cheapness does not come free - the biggest drawback is that there is no protection between threads.
+
+User-Level Threads
+User-level threads implement in user-level libraries, rather than via systems calls, so thread switching does not need to call operating system and to cause interrupt to the kernel. In fact, the kernel knows nothing about user-level threads and manages them as if they were single-threaded processes.
+
+Advantages:
+
+The most obvious advantage of this technique is that a user-level threads package can be implemented on an Operating System that does not support threads. Some other advantages are
+
+User-level threads does not require modification to operating systems.
+Simple Representation:
+    Each thread is represented simply by a PC, registers, stack and a small control block, all stored in the user process address space.
+Simple Management:
+    This simply means that creating a thread, switching between threads and synchronization between threads can all be done without intervention of the kernel.
+Fast and Efficient:
+    Thread switching is not much more expensive than a procedure call.
+Disadvantages:
+
+There is a lack of coordination between threads and operating system kernel. Therefore, process as whole gets one time slice irrespect of whether process has one thread or 1000 threads within. It is up to each thread to relinquish control to other threads.
+User-level threads requires non-blocking systems call i.e., a multithreaded kernel. Otherwise, entire process will blocked in the kernel, even if there are runable threads left in the processes. For example, if one thread causes a page fault, the process blocks.
+ 
+
+Kernel-Level Threads
+In this method, the kernel knows about and manages the threads. No runtime system is needed in this case. Instead of thread table in each process, the kernel has a thread table that keeps track of all threads in the system. In addition, the kernel also maintains the traditional process table to keep track of processes. Operating Systems kernel provides system call to create and manage threads.
+
+The implementation of general structure of kernel-level thread is
+ 
+
+                            <DIAGRAM>
+
+Advantages:
+
+Because kernel has full knowledge of all threads, Scheduler may decide to give more time to a process having large number of threads than process having small number of threads.
+Kernel-level threads are especially good for applications that frequently block.
+Disadvantages:
+
+The kernel-level threads are slow and inefficient. For instance, threads operations are hundreds of times slower than that of user-level threads.
+Since kernel must manage and schedule threads as well as processes. It require a full thread control block (TCB) for each thread to maintain information about threads. As a result there is significant overhead and increased in kernel complexity.
+ 
+
+Advantages of Threads over Multiple Processes
+Context Switching    Threads are very inexpensive to create and destroy, and they are inexpensive to represent. For example, they require space to store, the PC, the SP, and the general-purpose registers, but they do not require space to share memory information, Information about open files of I/O devices in use, etc. With so little context, it is much faster to switch between threads. In other words, it is relatively easier for a context switch using threads.
+Sharing    Treads allow the sharing of a lot resources that cannot be shared in process, for example, sharing code section, data section, Operating System resources like open file etc.
+Disadvantages of Threads over Multiprocesses
+Blocking     The major disadvantage if that if the kernel is single threaded, a system call of one thread will block the whole process and CPU may be idle during the blocking period.
+Security    Since there is, an extensive sharing among threads there is a potential problem of security. It is quite possible that one thread over writes the stack of another thread (or damaged shared data) although it is very unlikely since threads are meant to cooperate on a single task.
+Application that Benefits from Threads
+A proxy server satisfying the requests for a number of computers on a LAN would be benefited by a multi-threaded process. In general, any program that has to do more than one task at a time could benefit from multitasking. For example, a program that reads input, process it, and outputs could have three threads, one for each task.
+
+Application that cannot Benefit from Threads
+Any sequential process that cannot be divided into parallel task will not benefit from thread, as they would block until the previous one completes. For example, a program that displays the time of the day would not benefit from multiple threads.
+
+Resources used in Thread Creation and Process Creation
+
+
+When a new thread is created it shares its code section, data section and operating system resources like open files with other threads. But it is allocated its own stack, register set and a program counter.
+
+The creation of a new process differs from that of a thread mainly in the fact that all the shared resources of a thread are needed explicitly for each process. So though two processes may be running the same piece of code they need to have their own copy of the code in the main memory to be able to run. Two processes also do not share other resources with each other. This makes the creation of a new process very costly compared to that of a new thread.
+
+Context Switch
+To give each process on a multiprogrammed machine a fair share of the CPU, a hardware clock generates interrupts periodically. This allows the operating system to schedule all processes in main memory (using scheduling algorithm) to run on the CPU at equal intervals. Each time a clock interrupt occurs, the interrupt handler checks how much time the current running process has used. If it has used up its entire time slice, then the CPU scheduling algorithm (in kernel) picks a different process to run. Each switch of the CPU from one process to another is called a context switch.
+
+Major Steps of Context Switching
+The values of the CPU registers are saved in the process table of the process that was running just before the clock interrupt occurred.
+The registers are loaded from the process picked by the CPU scheduler to run next.
+In a multiprogrammed uniprocessor computing system, context switches occur frequently enough that all processes appear to be running concurrently. If a process has more than one thread, the Operating System can use the context switching technique to schedule the threads so they appear to execute in parallel. This is the case if threads are implemented at the kernel level. Threads can also be implemented entirely at the user level in run-time libraries. Since in this case no thread scheduling is provided by the Operating System, it is the responsibility of the programmer to yield the CPU frequently enough in each thread so all threads in the process can make progress.
+
+Action of Kernel to Context Switch Among Threads
+The threads share a lot of resources with other peer threads belonging to the same process. So a context switch among threads for the same process is easy. It involves switch of register set, the program counter and the stack. It is relatively easy for the kernel to accomplished this task.
+
+Action of kernel to Context Switch Among Processes
+Context switches among processes are expensive. Before a process can be switched its process control block (PCB) must be saved by the operating system. The PCB consists of the following information:
+
+The process state.
+The program counter, PC.
+The values of the different registers.
+The CPU scheduling information for the process.
+Memory management information regarding the process.
+Possible accounting information for this process.
+I/O status information of the process.
+When the PCB of the currently executing process is saved the operating system loads the PCB of the next process that has to be run on CPU. This is a heavy task and it takes a lot of time.
+
+ 
+
+ 
+
+
+
+*********************************************************************************
+
+
+#include<stdio.h>  
+#include <stdlib.h>
+
+struct node{
+    struct node *prev;
+    int data;
+    struct node *next;
+};
+
+void add(struct node **head, int data){
+    struct node *ptr = (struct node*)malloc(sizeof(struct node));
+      if(*head==NULL)  
+   {  
+       ptr->next = NULL;  
+       ptr->prev=NULL;  
+       ptr->data=data;  
+       *head=ptr;  
+   }  
+   else   
+   {  
+       ptr->data=data;  
+       ptr->prev=NULL;  
+       ptr->next = *head;  
+       (*head)->prev=ptr;  
+       *head=ptr;  
+   }  
+}
+
+void print(struct node *head){
+    struct node *temp = head;
+    while(temp!=NULL){
+        printf("%d\t %u\t %u\t %u\n",temp->data,temp->prev,&(temp->data),temp->next);
+        temp=temp->next;
+    }
+    printf("NULL\n");
+}
+
+void reverse(struct node **head){
+    struct node *curr = *head;
+    struct node *prev = NULL,*next = NULL;
+    while(curr!=NULL){
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    *head = prev;
+}
+int main(){
+    struct node *head = NULL;
+    int data,i,n;
+    printf("enter the size of list = ");
+    scanf("%d",&n);
+    for(i=0;i<n;i++){
+        printf("Enter %d value = ",i+1);
+        scanf("%d",&data);
+        add(&head,data);
+    }
+    print(head);
+    reverse(&head);
+    printf("\n");
+    printf("Reverse linked list ===\n");
+    print(head);
+}
+
+
+
+
+
+
+*************************************************************************
+
+/**
+ * C program to reverse a Doubly linked list
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+
+/*
+ * Basic structure of Node
+ */
+struct node {
+    int data;
+    struct node * prev;
+    struct node * next;
+}*head, *last;
+
+
+
+/*
+ * Functions used in this program
+ */
+void createList(int n);
+void displayList();
+void reverseList();
+
+
+int main()
+{
+    int n, data, choice=1;
+
+    head = NULL;
+    last = NULL;
+
+    /*
+     * Runs forever until user chooses 0
+     */
+    while(choice != 0)
+    {
+        printf("============================================\n");
+        printf("DOUBLY LINKED LIST PROGRAM\n");
+        printf("============================================\n");
+        printf("1. Create List\n");
+        printf("2. Reverse List\n");
+        printf("3. Display list\n");
+        printf("0. Exit\n");
+        printf("--------------------------------------------\n");
+        printf("Enter your choice : ");
+
+        scanf("%d", &choice);
+
+        switch(choice)
+        {
+            case 1:
+                printf("Enter the total number of nodes in list: ");
+                scanf("%d", &n);
+                createList(n);
+                break;
+            case 2:
+                reverseList();
+                break;
+            case 3:
+                displayList();
+                break;
+            case 0:
+                break;
+            default:
+                printf("Error! Invalid choice. Please choose between 0-3");
+        }
+
+        printf("\n\n\n\n\n");
+    }
+
+    return 0;
+}
+
+
+/**
+ * Creates a doubly linked list of n nodes.
+ * @n Number of nodes to be created
+ */
+void createList(int n)
+{
+    int i, data;
+    struct node *newNode;
+
+    if(n >= 1)
+    {
+        /*
+         * Create and link head node
+         */
+        head = (struct node *)malloc(sizeof(struct node));
+
+        printf("Enter data of 1 node: ");
+        scanf("%d", &data);
+
+        head->data = data;
+        head->prev = NULL;
+        head->next = NULL;
+
+        last = head;
+
+        /*
+         * Create and link rest of the n-1 nodes
+         */
+        for(i=2; i<=n; i++)
+        {
+            newNode = (struct node *)malloc(sizeof(struct node));
+
+            printf("Enter data of %d node: ", i);
+            scanf("%d", &data);
+
+            newNode->data = data;
+            newNode->prev = last; // Link new node with the previous node
+            newNode->next = NULL;
+
+            last->next = newNode; // Link previous node with the new node
+            last = newNode; // Make new node as last/previous node
+        }
+
+        printf("\nDOUBLY LINKED LIST CREATED SUCCESSFULLY\n");
+    }
+}
+
+
+/**
+ * Display the content of the list from beginning to end
+ */
+void displayList()
+{
+    struct node * temp;
+    int n = 1;
+
+    if(head == NULL)
+    {
+        printf("List is empty.\n");
+    }
+    else
+    {
+        temp = head;
+        printf("DATA IN THE LIST:\n");
+
+        while(temp != NULL)
+        {
+            printf("DATA of %d node = %d\n", n, temp->data);
+
+            n++;
+
+            /* Move pointer to next node */
+            temp = temp->next;
+        }
+    }
+}
+
+
+/**
+ * Reverse order of the doubly linked list
+ */
+void reverseList()
+{
+    struct node *current, *temp;
+
+    current = head;
+    while(current != NULL)
+    {
+        /*
+         * Swap the previous and next address fields of current node
+         */
+        temp = current->next;
+        current->next = current->prev;
+        current->prev = temp;
+
+        /* Move the current pointer to next node which is stored in temp */
+        current = temp;
+    }
+    
+    /* 
+     * Swap the head and last pointers
+     */
+    temp = head;
+    head = last;
+    last = temp;
+
+    printf("LIST REVERSED SUCCESSFULLY.\n");
+}
+
+************************************************************
+
+
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+
+int main()
+{   int i=0,len=0,temp = 0,j=0;
+    int arr[] = {1,2,3,4,5,6,7,8,9,0};
+   /* for(j=0;j<10;j++){
+        printf("Enter the arr[%d] == ",j+1);
+        scanf("%d",&arr[j]);
+    }*/
+    len = sizeof(arr)/sizeof(arr[0]);
+    for(i=0;i<len;i++){
+        printf("Array element arr[%d] = %d\n",i+1,arr[i]);
+        temp = temp + arr[i];
+    }
+    printf("Hello World = %d\t length arr == %d\n",temp,len);
+
+    return 0;
+}
+**************************************************************************************************
+#include <stdio.h>
+
+int main()
+{   int x=3,n=7,t,s,c;
+    s = n|(1<<x);
+    c = n&(~(1<<x));
+    t = n^(1<<x);
+    printf("Set bit == %d\n",s);
+    printf("Clear bit == %d\n",c);
+    printf("Toggle bit == %d\n",t);
+    return 0;
+}
+
+******************************************************************************************
+
+THREE THREE NODES REVERSE SINGLE LINKED LIST??
+
+
+#include<stdio.h>  
+#include<stdlib.h>  
+struct Node  
+{  
+    int val;  
+    struct Node* next;  
+};  
+  
+struct Node *reversed (struct Node *head1, int t)  
+{  
+    if (!head1)  
+        return NULL;  
+      
+    struct Node* current = head1;  
+    struct Node* next = NULL;  
+    struct Node* previous = NULL;  
+    int count = 0;  
+      
+    while (current != NULL && count < t)  
+    {  
+        next = current -> next;  
+        current -> next = previous;  
+        previous = current;  
+        current = next;  
+        count++;  
+    }  
+      
+    if (next != NULL)  
+    head1 -> next = reversed(next, t);  
+  
+    return previous;  
+}  
+  
+void push(struct Node** headreference, int newval)  
+{  
+    struct Node* newNode =  
+            (struct Node*) malloc(sizeof(struct Node));  
+  
+    newNode -> val = newval;  
+  
+    newNode -> next = (*headreference);    
+  
+    (*headreference) = newNode;  
+}  
+  
+void printingLst(struct Node *node)  
+{  
+    while (node != NULL)  
+    {  
+        printf("%d ", node -> val);  
+        node = node -> next;  
+    }  
+}     
+  
+int main(void)  
+{  
+    struct Node* head1 = NULL;  
+  
+    push(&head1, 19);  
+    push(&head1, 18);  
+    push(&head1, 17);  
+    push(&head1, 16);  
+    push(&head1, 15);  
+    push(&head1, 14);  
+    push(&head1, 13);  
+    push(&head1, 12);  
+    push(&head1, 11);         
+  
+    printf("\nGiven linked list \n");  
+    printingLst(head1);  
+    head1 = reversed(head1, 3);  
+  
+    printf("\nReversed Linked list \n");  
+    printingLst(head1);  
+  
+    return(0);  
+}  
+
+
+***********************************************(
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <semaphore.h>
+#include <unistd.h>
+
+
+int sum = 0; // Global int to store the sum of the two arrays
+sem_t mutex; // Synchronization Bit
+
+void *add(void *arg){
+    int *ptr = (int *) arg;
+    while(*ptr != -1){
+        sem_wait(&mutex);
+        sum += *ptr;
+        printf("value: %d sum %d
+", *ptr,sum );
+        sem_post(&mutex);
+        ptr++;
+    }
+    return NULL;
+}
+
+int main(int argc, char *args[]){
+    int A[4] = {1,2,3, -1}; // -1 marks the end of array
+    int B[4] = {4,2,6, -1};
+
+    pthread_t t_a, t_b;
+    sem_init(&mutex, 0, 1);
+    pthread_create(&t_a , NULL, add, A);
+    pthread_create(&t_b, NULL, add, B);
+
+    pthread_join(t_a, NULL);
+    pthread_join(t_b, NULL);
+    printf("Total: %d
+", sum);
+
+    return 0;
+}
+
+*****************************************************************
+#include <stdio.h>
+//#include <stdlib.h>
+#include <unistd.h> //Header file for sleep(). man 3 sleep for details.
+#include <pthread.h>
+
+// A normal C function that is executed as a thread
+// when its name is specified in pthread_create()
+void *myThreadFun()
+{
+	sleep(5);
+	printf("Printing GeeksQuiz from Thread \n");
+	return NULL;
+}
+
+int main()
+{
+	pthread_t id;
+	printf("Before Thread\n");
+	pthread_create(&id, NULL, myThreadFun,  NULL);
+	pthread_join(id, NULL);
+	printf("After Thread\n");
+    return 0;
+}
+
+
+*********************************************+++++++++++++++++
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <semaphore.h>
+#include <unistd.h>
+
+
+int sum = 0; // Global int to store the sum of the two arrays
+sem_t mutex; // Synchronization Bit
+
+void *add(void *arg){
+    int *ptr = (int *) arg;
+    while(*ptr != -1){
+      //  sem_wait(&mutex);
+        sum += *ptr;
+        printf("value: %d sum %d\n", *ptr,sum );
+        //sem_post(&mutex);
+        ptr++;
+    }
+    return NULL;
+}
+
+int main(int argc, char *args[]){
+    int A[4] = {1,2,3, -1}; // -1 marks the end of array
+    int B[4] = {4,2,6, -1};
+    int c[4] = {3,6,9, -1};
+
+    pthread_t t_a, t_b, t_c;
+    sem_init(&mutex, 2, 0);
+    pthread_create(&t_a , NULL, add, A);
+    pthread_create(&t_b, NULL, add, B);
+    pthread_create(&t_c, NULL, add, c);
+    pthread_join(t_a, NULL);
+    pthread_join(t_b, NULL);
+    pthread_join(t_c, NULL);
+    printf("Total: %d", sum);
+
+    return 0;
+}
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <semaphore.h>
+#include <unistd.h>
+
+
+int sum = 0; // Global int to store the sum of the two arrays
+int sum1 = 0; // Global int to store the sum of the two arrays
+int sum2 = 1; // Global int to store the sum of the two arrays
+sem_t mutex; // Synchronization Bit
+
+void *add(void *arg){
+    int *ptr = (int *) arg;
+    while(*ptr != -1){
+        sem_wait(&mutex);
+        sum += *ptr;
+        printf("value: %d sum %d\n", *ptr,sum );
+        sem_post(&mutex);
+        ptr++;
+    }
+    return NULL;
+}
+
+void *sub(void *arg){
+    int *ptr = (int *) arg;
+    while(*ptr != -1){
+        sem_wait(&mutex);
+        sum1 -= *ptr;
+        printf("value: %d sum %d\n", *ptr,sum1 );
+        sem_post(&mutex);
+        ptr++;
+    }
+    return NULL;
+}void *mul(void *arg){
+    int *ptr = (int *) arg;
+    while(*ptr != -1){
+        sem_wait(&mutex);
+        sum2 *= *ptr;
+        printf("value: %d sum %d\n", *ptr,sum2 );
+        sem_post(&mutex);
+        ptr++;
+    }
+    return NULL;
+}
+
+int main(){
+    int A[4] = {1,2,3, -1}; // -1 marks the end of array
+    int B[4] = {4,2,6, -1};
+    int c[4] = {3,6,9, -1};
+
+    pthread_t t_a, t_b, t_c;
+    sem_init(&mutex, 0, 1);
+    pthread_create(&t_a , NULL, add, A);
+    pthread_create(&t_b, NULL, sub, B);
+    pthread_create(&t_c, NULL, mul, c);
+    pthread_join(t_a, NULL);
+    pthread_join(t_b, NULL);
+    pthread_join(t_c, NULL);
+    printf("Total A: %d", sum);
+    printf("Total B: %d", sum1);
+    printf("Total C: %d", sum2);
+
+    return 0;
+}
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <semaphore.h>
+#include <unistd.h>
+
+
+int sum = 0; // Global int to store the sum of the two arrays
+int sum1 = 0; // Global int to store the sum of the two arrays
+int sum2 = 1; // Global int to store the sum of the two arrays
+sem_t mutex; // Synchronization Bit
+
+void *add(void *arg){
+    int *ptr = (int *) arg;
+    while(*ptr != -1){
+        sem_wait(&mutex);
+        sum += *ptr;
+        printf("value: %d sum %d\n", *ptr,sum );
+        sem_post(&mutex);
+        ptr++;
+    }
+    return NULL;
+}
+
+void *sub(void *arg){
+    int *ptr = (int *) arg;
+    while(*ptr != -1){
+        sem_wait(&mutex);
+        sum1 -= *ptr;
+        printf("value: %d sum %d\n", *ptr,sum1 );
+        sem_post(&mutex);
+        ptr++;
+    }
+    return NULL;
+}void *mul(void *arg){
+    int *ptr = (int *) arg;
+    while(*ptr != -1){
+        sem_wait(&mutex);
+        sum2 *= *ptr;
+        printf("value: %d sum %d\n", *ptr,sum2 );
+        sem_post(&mutex);
+        ptr++;
+    }
+    return NULL;
+}
+
+int main(){
+    int A[4] = {1,2,3, -1}; // -1 marks the end of array
+    int B[4] = {4,2,6, -1};
+    int c[4] = {3,6,9, -1};
+
+    pthread_t t_a, t_b, t_c;
+    sem_init(&mutex, 0, 1);
+    pthread_create(&t_a , NULL, add, A);
+    pthread_create(&t_b, NULL, sub, B);
+    pthread_create(&t_c, NULL, mul, c);
+    pthread_join(t_a, NULL);
+    pthread_join(t_b, NULL);
+    pthread_join(t_c, NULL);
+    printf("Total A: %d", sum);
+    printf("Total B: %d", sum1);
+    printf("Total C: %d", sum2);
+
+    return 0;
+}
+
+===================================================================
+
+Different aspects of function calling
+A function may or may not accept any argument. It may or may not return any value. Based on these facts, There are four different aspects of function calls.
+
+function without arguments and without return value
+function without arguments and with return value
+function with arguments and without return value
+function with arguments and with return value
+Example for Function without argument and return value
+Example 1
+
+#include<stdio.h>  
+void printName();  
+void main ()  
+{  
+    printf("Hello ");  
+    printName();  
+}  
+void printName()  
+{  
+    printf("Javatpoint");  
+}  
+Output
+
+Hello Javatpoint
+Example 2
+
+
+#include<stdio.h>  
+void sum();  
+void main()  
+{  
+    printf("\nGoing to calculate the sum of two numbers:");  
+    sum();  
+}  
+void sum()  
+{  
+    int a,b;   
+    printf("\nEnter two numbers");  
+    scanf("%d %d",&a,&b);   
+    printf("The sum is %d",a+b);  
+}  
+Output
+
+Going to calculate the sum of two numbers:
+
+Enter two numbers 10 
+24 
+
+The sum is 34
+Example for Function without argument and with return value
+Example 1
+
+#include<stdio.h>  
+int sum();  
+void main()  
+{  
+    int result;   
+    printf("\nGoing to calculate the sum of two numbers:");  
+    result = sum();  
+    printf("%d",result);  
+}  
+int sum()  
+{  
+    int a,b;   
+    printf("\nEnter two numbers");  
+    scanf("%d %d",&a,&b);  
+    return a+b;   
+}  
+Output
+
+
+Going to calculate the sum of two numbers:
+
+Enter two numbers 10 
+24 
+
+The sum is 34
+Example 2: program to calculate the area of the square
+
+#include<stdio.h>  
+int sum();  
+void main()  
+{  
+    printf("Going to calculate the area of the square\n");  
+    float area = square();  
+    printf("The area of the square: %f\n",area);  
+}  
+int square()  
+{  
+    float side;  
+    printf("Enter the length of the side in meters: ");  
+    scanf("%f",&side);  
+    return side * side;  
+}  
+Output
+
+Going to calculate the area of the square 
+Enter the length of the side in meters: 10 
+The area of the square: 100.000000
+Example for Function with argument and without return value
+Example 1
+
+#include<stdio.h>  
+void sum(int, int);  
+void main()  
+{  
+    int a,b,result;   
+    printf("\nGoing to calculate the sum of two numbers:");  
+    printf("\nEnter two numbers:");  
+    scanf("%d %d",&a,&b);  
+    sum(a,b);  
+}  
+void sum(int a, int b)  
+{  
+    printf("\nThe sum is %d",a+b);      
+}  
+Output
+
+Going to calculate the sum of two numbers:
+
+Enter two numbers 10 
+24 
+
+The sum is 34
+Example 2: program to calculate the average of five numbers.
+
+#include<stdio.h>  
+void average(int, int, int, int, int);  
+void main()  
+{  
+    int a,b,c,d,e;   
+    printf("\nGoing to calculate the average of five numbers:");  
+    printf("\nEnter five numbers:");  
+    scanf("%d %d %d %d %d",&a,&b,&c,&d,&e);  
+    average(a,b,c,d,e);  
+}  
+void average(int a, int b, int c, int d, int e)  
+{  
+    float avg;   
+    avg = (a+b+c+d+e)/5;   
+    printf("The average of given five numbers : %f",avg);  
+}  
+Output
+
+Going to calculate the average of five numbers:
+Enter five numbers:10 
+20
+30
+40
+50
+The average of given five numbers : 30.000000
+Example for Function with argument and with return value
+Example 1
+
+#include<stdio.h>  
+int sum(int, int);  
+void main()  
+{  
+    int a,b,result;   
+    printf("\nGoing to calculate the sum of two numbers:");  
+    printf("\nEnter two numbers:");  
+    scanf("%d %d",&a,&b);  
+    result = sum(a,b);  
+    printf("\nThe sum is : %d",result);  
+}  
+int sum(int a, int b)  
+{  
+    return a+b;  
+}  
+Output
+
+Going to calculate the sum of two numbers:
+Enter two numbers:10
+20 
+The sum is : 30   
+Example 2: Program to check whether a number is even or odd
+
+
+#include<stdio.h>  
+int even_odd(int);  
+void main()  
+{  
+ int n,flag=0;  
+ printf("\nGoing to check whether a number is even or odd");  
+ printf("\nEnter the number: ");  
+ scanf("%d",&n);  
+ flag = even_odd(n);  
+ if(flag == 0)  
+ {  
+    printf("\nThe number is odd");  
+ }  
+ else   
+ {  
+    printf("\nThe number is even");  
+ }  
+}  
+int even_odd(int n)  
+{  
+    if(n%2 == 0)  
+    {  
+        return 1;  
+    }  
+    else   
+    {  
+        return 0;  
+    }  
+}  
+Output
+
+Going to check whether a number is even or odd
+Enter the number: 100
+The number is even
+C Library Functions
+Library functions are the inbuilt function in C that are grouped and placed at a common place called the library. Such functions are used to perform some specific operations. For example, printf is a library function used to print on the console. The library functions are created by the designers of compilers. All C standard library functions are defined inside the different header files saved with the extension .h. We need to include these header files in our program to make use of the library functions defined in such header files. For example, To use the library functions such as printf/scanf we need to include stdio.h in our program which is a header file that contains all the library functions regarding standard input/output.
+
+The list of mostly used header files is given in the following table.
+
+SN	Header file	Description
+1	stdio.h	This is a standard input/output header file. It contains all the library functions regarding standard input/output.
+2	conio.h	This is a console input/output header file.
+3	string.h	It contains all string related library functions like gets(), puts(),etc.
+4	stdlib.h	This header file contains all the general library functions like malloc(), calloc(), exit(), etc.
+5	math.h	This header file contains all the math operations related functions like sqrt(), pow(), etc.
+6	time.h	This header file contains all the time-related functions.
+7	ctype.h	This header file contains all character handling functions.
+8	stdarg.h	Variable argument functions are defined in this header file.
+9	signal.h	All the signal handling functions are defined in this header file.
+10	setjmp.h	This file contains all the jump functions.
+11	locale.h	This file contains locale functions.
+12	errno.h	This file contains error handling functions.
+13	assert.h	This file contains diagnostics functions.
+
+
+***************************************************************************************
+/*****************************************************************************/
+
+#include <stdio.h>
+int add(int, int);
+int sub(int, int);
+
+
+int add(int a, int b){
+    return a+b;
+}
+int sub(int a, int b){
+    return a-b;
+}
+
+int main()
+{
+    int a=5,b=5,c,d;
+    c=add(a,b);
+    d=sub(a,b);
+    printf("Add == %d\n",c);
+    printf("Sub == %d",d);
+
+  //  return 0;
+}
+
+/*
+#include<stdio.h>  
+int sum();  
+void main()  
+{  
+    int result;   
+    printf("\nGoing to calculate the sum of two numbers:");  
+    result = sum();  
+    printf("%d",result);  
+}  
+int sum()  
+{  
+    int a,b;   
+    printf("\nEnter two numbers");  
+    scanf("%d %d",&a,&b);  
+    return a+b;   
+}  
+
+#include<stdio.h>  
+//int square();  
+void main()  
+{  
+    printf("Going to calculate the area of the square\n");  
+    float area = square();  
+    printf("The area of the square: %f\n",area);  
+}  
+int square()  
+{  
+    float side;  
+    printf("Enter the length of the side in meters: ");  
+    scanf("%f",&side);  
+    return (side * side);  
+}  
+*
+
+#include<stdio.h>  
+void average(int, int, int, int, int);  
+void main()  
+{  
+    int a,b,c,d,e;   
+    printf("\nGoing to calculate the average of five numbers:");  
+    printf("\nEnter five numbers:");  
+    scanf("%d %d %d %d %d",&a,&b,&c,&d,&e);  
+    average(a,b,c,d,e);  
+}  
+void average(int a, int b, int c, int d, int e)  
+{  
+    float avg;   
+    avg = (a+b+c+d+e)/5;   
+    printf("The average of given five numbers : %f",avg);  
+}  
+\
+*
+#include<stdio.h>  
+int sum(int, int);  
+void main()  
+{  
+    int a,b,result;   
+    printf("\nGoing to calculate the sum of two numbers:");  
+    printf("\nEnter two numbers:");  
+    scanf("%d %d",&a,&b);  
+    result = sum(a,b);  
+    printf("\nThe sum is : %d",result);  
+}  
+int sum(int a, int b)  
+{  
+    return a+b;  
+}  
+*/
+
+
+*******************************************************
+/******************************************************************************
+
+BOBBLE SORTING IN C
+
+#include <stdio.h>
+int sort(int [], int);
+int print(int [], int);
+
+int main()
+{   int arr[50],n,i;
+    printf("Enter the size of array == ");
+    scanf("%d",&n);
+    for(i=0;i<n;i++){
+        printf("Array [%d] == ",i+1);
+        scanf("%d",&arr[i]);
+    }
+    sort(arr,n);
+    print(arr,n);
+    return 0;
+}
+
+int print(int arr[], int n){
+    printf("Print array == ");
+    int i;
+    for(i=0;i<n;i++){
+    printf("%d\t",arr[i]);
+    }
+}
+
+int sort(int arr[], int n){
+    int i,j,temp;
+    for(i=0;i<n;i++){
+        for(j=i;j<n;j++){
+        if(arr[i]<arr[j]){
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+            
+        }
+}  
+  }
+
+**************************************************
+
+REVERSE STRING IN C 
+
+#include<stdio.h>
+#include<string.h>
+
+char reverse(char *str,int n){
+    int i,j,temp;
+    for(i=0,j=n;i<n/2;i++,j--){
+        temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
+    }
+   // printf("%s",str);
+}
+
+char print(char *str){
+    printf("Reverse String == ");
+    printf("%s",str);
+}
+
+void main(){
+    char str[50] = "veerababu";
+    int n = strlen(str)-1;
+    printf("Given String == ");
+    printf("%s",str);
+    printf("\n");
+    reverse(str, n);
+    print(str);
+}
+
+*********************************************************************
+STRUCTURE PADDING IN C??
+
+#include<stdio.h>
+//#pragma pack(1);
+
+struct node{
+    int a;
+    int b;
+    char c;
+    int d;
+    char e;
+    int f[2];
+    struct node* next;
+}__attribute__((packed));
+
+int main(){
+  struct node veera;
+  printf("Size of struct node == %ld\n",sizeof(veera));
+  return 0;
+}
+
+
+****************************************************
+STATIC KEYWORD IN C?
+
+#include <stdio.h>  
+int main()  
+{  
+   printf("%d",func());  
+   printf("\n%d",func());  
+  
+    return 0;  
+}  
+int func()  
+{  
+    static int count=0;  
+    count++;  
+    return count;  
+}  
+
+
+********************************************************
+
+FUNCTION POINTER IN C???
+
+
+#include<stdio.h>
+
+void fun(int a){
+    printf(" fun value == %d\n",a);
+}
+
+int main(){
+    void (*fun_ptr) (int) = &fun;
+    (fun_ptr) (10);
+    return 0;
+}
+
+
+*************************************************************
+STRING FUNCTION POINTER IN C??????????????
+
+#include<stdio.h>
+
+void fun(char* a){
+    printf(" fun value == %s\n",a);
+}
+
+int main(){
+    void (*fun_ptr) (char*) = &fun;
+    (*fun_ptr) ("Veera Babu Nayudu");
+    return 0;
+}
+
+***************************************************************
+ARRAY FUNCTION POINTER IN C??
+
+#include<stdio.h>
+
+int add(int, int);
+int sub(int, int);
+int mul(int, int);
+int div(int, int);
+
+
+int add(int a, int b){
+    printf(" Add == %d\n",a+b);
+}
+
+int sub(int a, int b){
+    printf("    Sub == %d\n",a-b);
+}
+
+int mul(int a, int b){
+    printf(" Mul == %d\n",a*b);
+}
+
+int div(int a, int b){
+    printf(" Div == %d\n",a/b);
+}
+int main(){
+    int (*fun_ptr_arr[]) (int , int) = {add, sub, mul, div};
+    unsigned int ch,a=10,b=5,i=0;
+   while(i<4){
+    printf("Enter the choice == ");
+    scanf("%d",&ch);
+    if(ch>3){
+        return 0;
+    }
+    else{
+        (*fun_ptr_arr[ch])(a, b);
+    }
+    i++;
+   }
+    return 0;
+}
+
+*************************************************************
+UNION DIFFERENCE IN C?
+
+#include<stdio.h>
+union abc{  
+int a;  
+char b;  
+float c;  
+int d;  
+}u;  
+int main()  
+{  
+    u.a = 65;
+    u.c = 65.0003;
+    u.b = 97;
+    u.d = 72;
+    printf("Union int a == %d\n",u.a);
+    printf("Union int b == %c\n",u.b);
+    printf("Union int c == %f\n",u.c);
+    printf("Union int d == %d\n",u.d);
+  printf("Size of union abc is %ld", sizeof(union abc));  
+  return 0;  
+}  
+
+
+*******************************************************************
+
+STRUCT AND UNION PROGRAM IN C?
+
+#include <stdio.h>  
+struct store  
+{  
+    double price;  
+    union  
+    {  
+        struct{  
+        char *title;  
+        char *author;  
+        int number_pages;  
+        } book;  
+      
+        struct {  
+        int color;  
+        int size;  
+        char *design;  
+        } shirt;  
+    }item;  
+};  
+  int main()  
+{  
+    struct store s;  
+    s.item.book.title = "C programming";   
+    s.item.book.author = "John";  
+    s.item.book.number_pages = 189;  
+    printf("Size is %ld\n", sizeof(s));  
+    printf("Size is %ld\n", sizeof(s.item.book));  
+    printf("Size is %ld\n", sizeof(s.item.shirt));  
+    return 0;  
+}  
+
+**************************************************************************
+
+https://www.javatpoint.com/file-handling-in-c
+
+*************************************************************************
+
+
+#include<stdio.h>  
+void main( )  
+{  
+FILE *fp ;  
+char ch ;  
+fp = fopen("file_handle.c","r") ;  
+while ( 1 )  
+{  
+ch = fgetc ( fp ) ;  
+if ( ch == EOF )  
+break ;  
+printf("%c",ch) ;  
+}  
+fclose (fp ) ;  
+}  
+
+********************
+#include <stdio.h>  
+void main()  
+{  
+    FILE *fptr;  
+    int id;  
+    char name[30];  
+    float salary;  
+    fptr = fopen("emp.txt", "w+");/*  open for writing */  
+    if (fptr == NULL)  
+    {  
+        printf("File does not exists \n");  
+        return;  
+    }  
+    printf("Enter the id\n");  
+    scanf("%d", &id);  
+    fprintf(fptr, "Id= %d\n", id);  
+    printf("Enter the name \n");  
+    scanf("%s", name);  
+    fprintf(fptr, "Name= %s\n", name);  
+    printf("Enter the salary\n");  
+    scanf("%f", &salary);  
+    fprintf(fptr, "Salary= %.2f\n", salary);  
+    fclose(fptr);  
+}  
+
+********************************************
+
+	SOCKET PROGRAMING IN C
+
+Server.c
+
+
+
+// Server side C/C++ program to demonstrate Socket
+// programming
+#include <netinet/in.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <unistd.h>
+#define PORT 8080
+int main(int argc, char const* argv[])
+{
+    int server_fd, new_socket, valread;
+    struct sockaddr_in address;
+    int opt = 1;
+    int addrlen = sizeof(address);
+    char buffer[1024] = { 0 };
+    char* hello = "Hello from server";
+ 
+    // Creating socket file descriptor
+    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        perror("socket failed");
+        exit(EXIT_FAILURE);
+    }
+ 
+    // Forcefully attaching socket to the port 8080
+    if (setsockopt(server_fd, SOL_SOCKET,
+                   SO_REUSEADDR | SO_REUSEPORT, &opt,
+                   sizeof(opt))) {
+        perror("setsockopt");
+        exit(EXIT_FAILURE);
+    }
+    address.sin_family = AF_INET;
+    address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_port = htons(PORT);
+ 
+    // Forcefully attaching socket to the port 8080
+    if (bind(server_fd, (struct sockaddr*)&address,
+             sizeof(address))
+        < 0) {
+        perror("bind failed");
+        exit(EXIT_FAILURE);
+    }
+    if (listen(server_fd, 3) < 0) {
+        perror("listen");
+        exit(EXIT_FAILURE);
+    }
+    if ((new_socket
+         = accept(server_fd, (struct sockaddr*)&address,
+                  (socklen_t*)&addrlen))
+        < 0) {
+        perror("accept");
+        exit(EXIT_FAILURE);
+    }
+    valread = read(new_socket, buffer, 1024);
+    printf("%s\n", buffer);
+    send(new_socket, hello, strlen(hello), 0);
+    printf("Hello message sent\n");
+ 
+    // closing the connected socket
+    close(new_socket);
+    // closing the listening socket
+    shutdown(server_fd, SHUT_RDWR);
+    return 0;
+}
+
+
+
+
+client.c
+
+
+
+
+
+// Client side C/C++ program to demonstrate Socket
+// programming
+#include <arpa/inet.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <unistd.h>
+#define PORT 8080
+ 
+int main(int argc, char const* argv[])
+{
+    int sock = 0, valread, client_fd;
+    struct sockaddr_in serv_addr;
+    char* hello = "Hello from client";
+    char buffer[1024] = { 0 };
+    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        printf("\n Socket creation error \n");
+        return -1;
+    }
+ 
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_port = htons(PORT);
+ 
+    // Convert IPv4 and IPv6 addresses from text to binary
+    // form
+    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)
+        <= 0) {
+        printf(
+            "\nInvalid address/ Address not supported \n");
+        return -1;
+    }
+ 
+    if ((client_fd
+         = connect(sock, (struct sockaddr*)&serv_addr,
+                   sizeof(serv_addr)))
+        < 0) {
+        printf("\nConnection Failed \n");
+        return -1;
+    }
+    send(sock, hello, strlen(hello), 0);
+    printf("Hello message sent\n");
+    valread = read(sock, buffer, 1024);
+    printf("%s\n", buffer);
+ 
+    // closing the connected socket
+    close(client_fd);
+    return 0;
+}
+
+
+
+
+Compiling:
+
+gcc client.c -o client
+gcc server.c -o server
+Output:
+
+Client:Hello message sent
+Hello from server
+Server:Hello from client
+Hello message sent
+
+
+
+*************************************************************
+
+MUTEX ??
+
+
+#include <stdio.h>
+#include <pthread.h>
+
+void processA();
+void processB();
+void processC();
+void processD();
+
+pthread_mutex_t mutex;
+
+void main(){
+    pthread_t thread1;
+    pthread_t thread2;
+    pthread_t thread3;
+    pthread_t thread4;
+
+    pthread_mutex_init(&mutex,NULL);
+
+    pthread_create(&thread1, NULL, (void *)&processA,NULL);
+    pthread_create(&thread2, NULL, (void *)&processB,NULL);
+    pthread_create(&thread3, NULL, (void *)&processC,NULL);
+    pthread_create(&thread4, NULL, (void *)&processD,NULL);
+
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+    pthread_join(thread3, NULL);
+    pthread_join(thread4, NULL);            
+
+    pthread_mutex_destroy(&mutex);
+}
+void processA()
+{
+    while (1)
+    {
+        pthread_mutex_lock(&mutex);
+        printf("A \n");
+        pthread_mutex_unlock(&mutex);
+    }
+}
+void processB()
+{
+    while (1)
+    {
+        pthread_mutex_lock(&mutex);
+        printf("B \n");
+        pthread_mutex_unlock(&mutex);
+    }
+}
+void processC()
+{
+    while (1)
+    {
+        pthread_mutex_lock(&mutex);
+        printf("C \n");
+        pthread_mutex_unlock(&mutex);
+    }
+}
+void processD()
+{
+pthread_mutex_lock(&mutex);
+    while (1)
+    {
+        pthread_mutex_lock(&mutex);
+        printf("D \n");
+        pthread_mutex_unlock(&mutex);
+    }
+}
+
+*****************************************************
+
